@@ -1,4 +1,4 @@
-function [XallStates,Xfw_States] = fixedwing(XallStates,h,Xfw_States)
+function [XallStates,Xfw_States] = fixedwing(XallStates,h,Xfw_States,agenti)
    % states now 
     desired_pos = XallStates;
     x_now = Xfw_States(1);
@@ -28,7 +28,9 @@ function [XallStates,Xfw_States] = fixedwing(XallStates,h,Xfw_States)
     w1_record = 0;
     w2_record = 0;
 
-   
+    if(agenti==1)
+        v_max = 40;
+    end
 
     for a = a_min : 0.01:a_max
         for w1 = w_theta_min: w_theta_part :w_theta_max

@@ -50,8 +50,8 @@ X1 = [];
 X2 =[];
 Xplot = [];
 Xplot2 = [];
-bata=2;
-alpha=1;
+bata=0;
+alpha=10;
 
 Adj=[0 1 1 1 1 1 1 1 1 1;     % a(ij)
    1 0 1 1 1 1 1 1 1 1;
@@ -131,8 +131,9 @@ for t = 1:timesteps
 
    [p_x,p_y,p_z,V_x,V_y,V_z] = transmitStates(XallStates,p_x,p_y,p_z,V_x,V_y,V_z,N);
     % ------consensus----------
-
-    for t1 = 1:K
+    
+    %for t1 = 1:K
+    for t1 = 1:2
     for i=2:N
         for j=2:N   
         u_x(i)=u_x(1)-alpha*(((p_x(i)-deta_x(i))-p_x(1))+bata*(V_x(i)-V_x(1)))-Adj(i,j)*((p_x(i)-p_x(j))-(deta_x(i)-deta_x(j))+bata*(V_x(i)-V_x(j)));
@@ -162,7 +163,7 @@ for t = 1:timesteps
 
      % fixedwing autopilot
      for agenti = 1:N
-     [XallStates(:,agenti),Xfw_States(:,agenti)] = fixedwing(XallStates(:,agenti),h,Xfw_States(:,agenti));
+     [XallStates(:,agenti),Xfw_States(:,agenti)] = fixedwing(XallStates(:,agenti),h,Xfw_States(:,agenti),agenti);
          
      end
      
